@@ -1,0 +1,19 @@
+hospital-wait-ai-blockchain/
+├─ data/                      
+├─ model/                    
+├─ api/
+│  ├─ app.py                  
+│  ├─ requirements.txt
+│  ├─ Dockerfile
+│  └─ predict_utils.py
+├─ training/
+│  ├─ train_model.py
+│  └─ requirements.txt
+├─ blockchain/
+│  ├─ contracts/
+│  │  └─ AppointmentAudit.sol
+│  ├─ write_audit.py
+│  └─ requirements.txt
+├─ docker-compose.yml
+├─ README.md
+└─ .gitignore
