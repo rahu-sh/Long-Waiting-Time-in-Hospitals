@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  api:
+    build: ./api
+    ports:
+      - "5000:5000"
+    environment:
+      - WEB3_PROVIDER=http://blockchain:8545
+    depends_on:
+      - blockchain
+  blockchain:
+    image: trufflesuite/ganache-cli:latest
+    command: --deterministic -p 8545
+    ports:
+      - "8545:8545"
