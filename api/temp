@@ -1,0 +1,25 @@
+# api/predict_utils.py
+import joblib
+import pandas as pd
+
+model = None
+
+def load_model(path="../model/wait_predictor.joblib"):
+    global model
+    model = joblib.load(path)
+
+def preprocess_input(payload):
+    # payload is a dict with keys matching training features
+    df = pd.DataFrame([payload])
+    # minimal: one-hot must match training; in production use saved pipeline (sklearn ColumnTransformer)
+    df = pd.get_dummies(df)
+    # align with training columns: in prod save columns list and reindex to that
+    return df
+
+def predict_wait(payload):
+    if model is None:
+        load_model()
+    X = preprocess_input(payload)
+    # in real build: X = X.reindex(columns=MODEL_COLUMNS, fill_value=0)
+    preds = model.predict(X)
+    return float(preds[0])
